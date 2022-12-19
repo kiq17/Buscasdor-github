@@ -13,15 +13,18 @@ O que foi usado neste projeto:
 
 ## :sparkles: Especifiações ##
 
-1- <h4>Usuário buscado não existe</h4>
+<h4>Usuário buscado não existe</h4>
 
-https://github.com/kiq17/Buscador-github/blob/main/side/erroPerfil.PNG
+<img src="https://github.com/kiq17/Buscador-github/blob/main/side/erroPerfil.PNG">
 
-O nome está esparado é este ao lado
+<div style="display: flex; justify-content: center;">
+<p>O nome está esparado é este ao lado</p>
+<img src="https://github.com/kiq17/Buscador-github/blob/main/side/Frame%203.png">
+</div>
 
-2- <h4>Resultado de uma busca por um usuário existente</h4>
+<h4>Resultado de uma busca por um usuário existente</h4>
 
 https://github.com/kiq17/Buscador-github/blob/main/side/perfilGit.PNG
 
-2.1- <h4>Os repositórios retornados são os que possuem maior quantidade de estrelas, somente é exibido dez deles</h4>
+<h4>Os repositórios retornados são os que possuem maior quantidade de estrelas, somente é exibido dez deles</h4>
 
