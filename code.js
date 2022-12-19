@@ -1,97 +1,98 @@
-const input = document.querySelector('.input-busca input')
-const icon = document.querySelector('.input-busca i')
-const conteudo = document.querySelector('.conteiner')
+const input = document.querySelector('input')
 const resultado = document.querySelector('.resultado')
-const loader = document.querySelector('.processing')
+const icone = document.querySelector('i')
 
-const url = 'https://api.github.com/users/'
+const urlGit = 'https://api.github.com/users/'
 
-icon.addEventListener('click', buscarUser)
+icone.addEventListener('click', pegarValor)
 
-function buscarUser() {
-    if (input.value === '') {
-        mostrarError();
-        return
+function pegarValor() {
+    let user = input.value
+
+    if (user === '') {
+        alert('Campo vazio!')
+        return;
     }
 
-    chamarAPI(input.value)
-}
+    carregando()
 
-function mostrarError() {
-    input.classList.add('error')
-    /*  const p = document.createElement('p')
-    p.classList.add('error')
-    p.innerText = msgError
-    p.style.color = 'red'
-    conteudo.appendChild(p) */
-    setTimeout(() => input.classList.remove('error'), 1500)
+    chamarAPI(user)
 }
-
 
 async function chamarAPI(user) {
-    const userUrl = url + user
-    const reposUrl = `${url}${user}/repos`
+    const userURL = urlGit + user
+    const userRepos = `${urlGit}${user}/repos`
 
     try {
-        const doc = await Promise.all([fetch(userUrl), fetch(reposUrl)])
-        if (doc[0].status === 404) {
-            mostrarError();
+        let promises = await Promise.all([fetch(userURL), fetch(userRepos)])
+        if(promises[0].status === 404){
+            alert('Usuário não existe, verifique se você digitou corretamente.')
+            limparHTML()
+            input.value = ''
+            return
         }
-        const docUser = await doc[0].json()
-        const docRepos = await doc[1].json()
-        userConteudo(docUser);
-        reposConteudo(docRepos);
+        let docUser = await promises[0].json()
+        let docRepos = await promises[1].json()
+        userGit(docUser)
+        userGitRepos(docRepos)
     } catch (error) {
-        console.log(error)
     }
 }
 
-function userConteudo(data) {
-    limparHTML();
-    const { avatar_url, followers, following, name, bio, public_repos } = data
-    const divFoto = document.createElement('div')
-    divFoto.classList.add('foto-perfil')
-    resultado.appendChild(divFoto)
+function userGit(docUser) {
+    limparHTML()
+    const { name, avatar_url, bio, followers, following, public_repos } = docUser
 
-
-    const divConteudo = document.createElement('div')
-    divConteudo.classList.add('conteudo-usuario')
-    resultado.appendChild(divConteudo)
-
-    divFoto.innerHTML = `<img src="${avatar_url}"
-    alt="Foto do Perfil">`
-
-    divConteudo.innerHTML = `<h3 class="nome">${name}</h3>
-    <p class="desc">${bio}</p>
-    <div class="status">
-    <p>${followers}<span>Seguidores</span></p>
-    <p>${following}<span>Seguindo</span></p>
-    <p>${public_repos}<span>Repositórios</span></p>
+    resultado.innerHTML = `
+    <div class="foto-perfil">
+    <img src="${avatar_url}"
+    alt="Foto do Perfil">
     </div>
-    <div class="repos">
-            <h3>Repositórios:</h3>
-            <div class="rep-single">
-            
-            </div>
-    </div>`
+    <div class="conteudo-usuario">
+                <h3 class="nome">${name}</h3>
+                <p class="desc">${bio}</p>
+                <div class="status">
+                    <p>${followers}<span>Seguidores</span></p>
+                    <p>${following}<span>Seguindo</span></p>
+                    <p>${public_repos}<span>Repositórios</span></p>
+                </div>
+    </div>
+    `
+    resultado.classList.remove('ativo')
+
 }
 
-function reposConteudo(cont) {
-    const teste = document.querySelector('.rep-single')
+function userGitRepos(repos) {
+    const div = document.createElement('div')
+    const divSingle = document.createElement('div')
+    div.classList.add('repos')
+    divSingle.classList.add('rep-single')
 
-    cont.sort((a, b) => b.stargazers_count - a.stargazers_count)
-    const dezMais = cont.slice(0, 7)
 
-    dezMais.forEach(e => {
-        const link = document.createElement('a')
-        link.innerText = e.name;
-        link.href = e.html_url;
-        link.target = '_blank';
-        teste.appendChild(link)
-    });
+    let starOrder = repos.sort((a,b) => b.stargazers_count - a.stargazers_count)
+
+    let topTen = starOrder.slice(0,10)
+
+    topTen.forEach(repositorio => {
+        div.innerHTML = `<h3>Repositórios:</h3>`
+        divSingle.innerHTML += `
+        <a href="${repositorio.html_url}" target="_blank">${repositorio.name}</a>
+        `
+        div.appendChild(divSingle)
+        resultado.appendChild(div)
+    })
 }
 
-function limparHTML(){
+function limparHTML() {
     resultado.innerHTML = ''
 }
 
+
+function carregando(){
+    resultado.classList.add('ativo')
+    resultado.innerHTML = `<div class="loader">
+    <span class="loader-icon"></span>
+    <span class="loader-icon"></span>
+    <span class="loader-icon"></span>
+</div>`
+}

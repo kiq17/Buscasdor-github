@@ -1,4 +1,4 @@
-*{
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -7,7 +7,7 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Akshar:wght@300;400;500&display=swap');
 
-body{
+body {
     background-color: #272822;
     display: flex;
     justify-content: center;
@@ -15,7 +15,7 @@ body{
     min-height: 100vh;
 }
 
-.conteiner{
+.conteiner {
     background-color: rgba(255, 255, 255, 0.1);
     border: 1px solid rgba(255, 255, 255, 0.1);
     box-shadow: 0 0 1px 1px rgba(255, 255, 255, 0.1);
@@ -24,13 +24,13 @@ body{
     border-radius: 12px;
 }
 
-.input-busca{
+.input-busca {
     display: flex;
     position: relative;
 }
 
 
-input{
+input {
     width: 100%;
     margin: 0 auto;
     padding: 10px 15px;
@@ -40,96 +40,101 @@ input{
 }
 
 
-input.error{
-    animation: shake 300ms forwards;  
+input.error {
+    animation: shake 300ms forwards;
     border: 1px solid red;
     box-shadow: 0 0 10px 0px rgb(255, 68, 68);
 }
 
 
 @keyframes shake {
-    0%{
-        transform:  translateX(-4px);
+    0% {
+        transform: translateX(-4px);
     }
-    25%{
-        transform:  translateX(0px);
+
+    25% {
+        transform: translateX(0px);
     }
-    50%{
-        transform:  translateX(4px);
+
+    50% {
+        transform: translateX(4px);
     }
-    75%{
-        transform:  translateX(-4px);
+
+    75% {
+        transform: translateX(-4px);
     }
-    100%{
-        transform:  translateX(0px);
+
+    100% {
+        transform: translateX(0px);
     }
 }
 
-i{
+i {
     position: absolute;
     right: 20px;
     top: 8px;
     font-size: 20px;
     cursor: pointer;
-} 
+}
 
-.resultado{
+.resultado {
     margin-top: 50px;
     display: flex;
     gap: 50px;
     flex-wrap: wrap;
 }
 
-.foto-perfil{
-    width: 150px;
-    height: 150px; 
+.foto-perfil {
+    width: 250px;
+    height: 250px;
+    margin: 0 auto;
 }
 
-img{
+img {
     width: 100%;
     border-radius: 100%;
     height: 100%;
     object-fit: cover;
 }
 
-.nome{
+.nome {
     margin-bottom: 10px;
     color: white;
     font-weight: 600;
 }
 
-.desc{
+.desc {
     color: rgb(189, 189, 189);
 }
 
-.status{
+.status {
     display: flex;
     margin-top: 20px;
     gap: 30px;
     flex-wrap: wrap;
 }
 
-.status p{
+.status p {
     color: rgb(189, 189, 189);
     display: flex;
     gap: 5px;
 }
 
-span{
+span {
     color: white;
     font-weight: 600;
 }
 
-.repos{
+.repos {
     margin-top: 40px;
 }
 
-.repos h3{
+.repos h3 {
     color: white;
     margin-bottom: 20px;
 }
 
-.rep-single{
+.rep-single {
     display: flex;
     gap: 20px;
     flex-wrap: wrap;
@@ -147,17 +152,58 @@ span{
     border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
-@media (max-width: 1199px) {
+@media (max-width: 600px) {
 
-    .foto-perfil{
-        margin: 0 auto;
+    .conteiner {
+        width: 100%;
+    }
+
+    .foto-perfil {
+        width: 200px;
+        height: 200px;
     }
 }
 
-@media (max-width: 600px) {
+.loader{
+    display: none;
+}
 
-    .conteiner{
-        width: 100%;
-        height: 100vh;
+.resultado.ativo .loader {
+    margin: 0 auto;
+    width: max-content;
+    display: flex;
+    gap: 10px;
+}
+
+.loader-icon {
+    display: block;
+    border-radius: 4px;
+    width: 5px;
+    height: 25px;
+    animation: loadAnimacao 1s alternate infinite;
+}
+
+.loader-icon:nth-child(2){
+    animation-delay: .3s;
+}
+
+.loader-icon:nth-child(3){
+    animation-delay: .5s;
+}
+
+@keyframes loadAnimacao {
+    0%{
+        transform: scale(0);
+        background-color: darkgray;
     }
+    100%{
+        transform: scale(1);
+        background-color: white;
+    }
+}
+
+.conteudo-usuario{
+   display: flex;
+   justify-content: center;
+   flex-direction: column;
 }
