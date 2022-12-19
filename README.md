@@ -1,4 +1,4 @@
-<h1 align="center"> Buscador de usuários no github</h1>
+<h1 align="center"> Buscador de usuários do github</h1>
 
 ## :sparkles: Sobre ##
 Projeto realizado por meio da API do Github. Para pegar as informações do avatar, descrição e repositórios do usuaário foram ulizados os conceitos de promises e Asycn Await
