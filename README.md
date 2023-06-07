@@ -1,7 +1,7 @@
 <div align="center">
   <h1 align="center"> Buscador de usuários do github</h1>
   <a href="https://kiq17.github.io/buscador-github/" target="_blank">Clique aqui para conferir</a>
-<div>
+</div>
 
 ## :sparkles: Sobre ##
 Projeto realizado por meio da API do Github. Para pegar as informações do avatar, descrição e repositórios do usuaário foram ulizados os conceitos de promises e Asycn Await.
